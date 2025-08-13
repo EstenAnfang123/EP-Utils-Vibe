@@ -1,0 +1,26 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<SelectDialog
+		title="{i18n>selectWorkers}"
+		noDataText="{i18n>noWorkers}"
+		multiSelect="true"
+		liveChange=".onUsersDialogSearch"
+		confirm=".onUsersDialogConfirm"
+		cancel=".onUsersDialogCancel"
+		items="{
+			path: '/users'
+		}"
+	>
+		<StandardListItem
+			title="{
+				parts: ['firstname', 'lastname'],
+				formatter: '.formatter.formatUserName'
+			}"
+			description="{ProductId}"
+			type="Active"
+			selected="{selected}"
+		/>
+	</SelectDialog>
+</core:FragmentDefinition>

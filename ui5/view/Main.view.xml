@@ -1,0 +1,122 @@
+<mvc:View
+	controllerName="sap.ui.demo.basicTemplate.controller.Main"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+>
+	<Page id="pageMain">
+		<headerContent>
+			<Toolbar id="footerToolbar">
+				<ToolbarSpacer/>
+				<l:HorizontalLayout class="sapUiResponsiveContentPadding">
+					<Input
+						id="loginInput"
+						type="Text"
+						placeholder="Přihlašovací jméno"
+						required="true"
+						submit="onLogin"
+					/>
+					<Input
+						id="pwdInput"
+						type="Password"
+						placeholder="Heslo"
+						required="true"
+						submit="onLogin"
+					/>
+					<Button
+						id="loginButton"
+						text="Přihlásit se"
+						type="Emphasized"
+						press="onLogin"
+					/>
+				</l:HorizontalLayout>
+			</Toolbar>
+		</headerContent>
+		<l:HorizontalLayout allowWrapping="true">
+			<GenericTile
+				id="tileEso"
+				class="sapUiMediumMarginBegin sapUiSmallMarginTop"
+				header="EP: Částka ➔ Eso"
+				press="onPress"
+				mode="HeaderMode"
+				subheader="Přepíše částku bez DPH do čáska eso"
+			>
+				<!-- <TileContent unit="EUR" footer="Current Quarter">
+                <ImageContent src="sap-icon://home-share" />
+            </TileContent> -->
+			</GenericTile>
+			<GenericTile
+				id="tileEPUtil2"
+				class="sapUiMediumMarginBegin sapUiSmallMarginTop"
+				header="EP: Částka2"
+				press="onPress"
+				mode="HeaderMode"
+				subheader=""
+			/>
+			<GenericTile
+				id="tileEPUtil3"
+				class="sapUiMediumMarginBegin sapUiSmallMarginTop"
+				header="Kontrola SLA"
+				press="onPress"
+				mode="HeaderMode"
+				subheader=""
+			/>
+			<GenericTile
+				id="tileEPUtil4"
+				class="sapUiMediumMarginBegin sapUiSmallMarginTop"
+				header="Excel"
+				press="onPress"
+				mode="HeaderMode"
+				subheader=""
+			/>
+			<GenericTile
+				id="tileRates"
+				class="sapUiMediumMarginBegin sapUiSmallMarginTop"
+				header="Sazby"
+				press="onPress"
+				mode="HeaderMode"
+				subheader=""
+			/>
+			<GenericTile
+				id="tileBonuses"
+				class="sapUiMediumMarginBegin sapUiSmallMarginTop"
+				header="Bonusy"
+				press="onPress"
+				mode="HeaderMode"
+				subheader=""
+			/>
+			<GenericTile
+				id="projectsOverview"
+				class="sapUiMediumMarginBegin sapUiSmallMarginTop"
+				header="Projects Overview"
+				press="onPress"
+				mode="HeaderMode"
+				subheader=""
+			/>
+			<GenericTile
+				id="utilization"
+				class="sapUiMediumMarginBegin sapUiSmallMarginTop"
+				header="Utilizace"
+				press="onPress"
+				mode="HeaderMode"
+				subheader="Podle lidí"
+			/>
+			<GenericTile
+				id="utilizationByProject"
+				class="sapUiMediumMarginBegin sapUiSmallMarginTop"
+				header="Utilizace"
+				press="onPress"
+				mode="HeaderMode"
+				subheader="Podle projektu"
+			/>
+			<GenericTile
+				id="utilizationByOffer"
+				class="sapUiMediumMarginBegin sapUiSmallMarginTop"
+				header="Utilizace"
+				press="onPress"
+				mode="HeaderMode"
+				subheader="Podle nabídky"
+			/>
+		</l:HorizontalLayout>
+	</Page>
+</mvc:View>

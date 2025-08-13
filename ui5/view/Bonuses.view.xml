@@ -1,0 +1,106 @@
+<mvc:View
+	controllerName="sap.ui.demo.basicTemplate.controller.Bonuses"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+>
+	<Page
+		title="Bonusy"
+		id="pageBonuses"
+		showNavButton="true"
+		navButtonPress="onNavBack"
+	>
+		<IconTabBar
+			id="idIconTabBar"
+			select=".onFilterSelect"
+			class="sapUiResponsiveContentPadding"
+		>
+			<items>
+				<IconTabFilter
+					icon="sap-icon://decline"
+					iconColor="Negative"
+					text="Neexportované"
+					key="NotExported"
+				/>
+				<IconTabFilter
+					icon="sap-icon://complete"
+					iconColor="Positive"
+					text="Exportované"
+					key="Exported"
+				/>
+			</items>
+			<content>
+				<Table
+					id="idBonusesTable"
+					alternateRowColors="true"
+					growing="true"
+					items="{
+						path: '/',
+						sorter: [{
+							path: 'groupDate',
+							descending: false,
+							group: true
+						}]
+					}"
+				>
+					<headerToolbar>
+						<OverflowToolbar>
+							<content>
+								<Title
+									text="Bonusy"
+									level="H2"
+								/>
+								<ToolbarSpacer/>
+								<CheckBox
+									text="Vybrat všechny"
+									name="exportAll"
+									select="onSelectAll"
+								/>
+								<Button
+									icon="sap-icon://sys-next-page"
+									text="Export"
+									type="Accept"
+									press="exportData"
+								/>
+								<Button
+									icon="sap-icon://refresh"
+									press="onTableRefresh"
+								/>
+							</content>
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column
+							hAlign="Center"
+							mergeDuplicates="true"
+						>
+							<Text text="Jméno"/>
+						</Column>
+						<Column hAlign="Center">
+							<Text text="Projekt"/>
+						</Column>
+						<Column hAlign="Center">
+							<Text text="Odpracovaný čas"/>
+						</Column>
+						<Column hAlign="Center">
+							<Text text="Export?"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem vAlign="Middle">
+							<cells>
+								<Text text="{userName}"/>
+								<Text text="{projectName}"/>
+								<Text text="{hours}"/>
+								<CheckBox
+									name="export"
+									selected="{export}"
+								/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</content>
+		</IconTabBar>
+	</Page>
+</mvc:View>

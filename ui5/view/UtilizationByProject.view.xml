@@ -1,0 +1,171 @@
+<mvc:View
+	controllerName="sap.ui.demo.basicTemplate.controller.UtilizationByProject"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+>
+	<SplitApp id="pageUtilization">
+		<masterPages>
+			<Page
+				id="master"
+				showNavButton="true"
+				navButtonPress=".onNavBack"
+				xmlns:core="sap.ui.core"
+				core:require="{
+					formatMessage: 'sap/base/strings/formatMessage'
+				}"
+				title="{
+					parts: [{
+						path: 'i18n>projects'
+					}, {
+						path: 'metadata>/projectsCount'
+					}],
+					formatter: '.formatter.itemsCount'
+				}"
+				class="sapUiStdPage"
+			>
+				<!-- <headerContent>
+					<MenuButton icon="sap-icon://menu2">
+						<menu>
+							<Menu>
+								<items>
+									<MenuItem
+										icon="sap-icon://excel-attachment"
+										text="{i18n>export}"
+									>
+										<items>
+											<MenuItem
+												icon="sap-icon://group"
+												text="{i18n>freeCapacitiesOverview}"
+												press=".onExportAvailableCapacityPress"
+											/>
+										</items>
+									</MenuItem>
+								</items>
+							</Menu>
+						</menu>
+					</MenuButton>
+				</headerContent> -->
+				<List
+					id="projectsList"
+					items="{
+						path: '/projects',
+						sorter: {
+							path: 'name'
+						}
+					}"
+					growing="true"
+					growingScrollToLoad="true"
+					mode="SingleSelectMaster"
+					itemPress=".onPressProjectsItem"
+				>
+					<headerToolbar>
+						<Toolbar>
+							<content>
+								<SearchField
+									placeholder="{i18n>utilizationSearchFieldPlaceholder}"
+									search=".onSearch"
+									liveChange=".onSearch"
+								/>
+								<Button
+									icon="sap-icon://synchronize"
+									press=".onRefreshUsersPress"
+								/>
+							</content>
+						</Toolbar>
+					</headerToolbar>
+					<items>
+						<ObjectListItem
+							title="{name}"
+							type="Active"
+						>
+							<attributes>
+								<ObjectAttribute text="{tmFix}"/>
+							</attributes>
+						</ObjectListItem>
+					</items>
+				</List>
+				<footer>
+					<OverflowToolbar
+						width="100%"
+						height="46px"
+					>
+						<content>
+							<ToolbarSpacer/>
+							<Button
+								icon="sap-icon://sort"
+								press="handleSortButtonPressed"
+							/>
+							<Button
+								icon="sap-icon://filter"
+								press="handleFilterButtonPressed"
+							/>
+							<Button
+								icon="sap-icon://group-2"
+								press="handleGroupButtonPressed"
+							/>
+						</content>
+					</OverflowToolbar>
+				</footer>
+				<headerContent/>
+			</Page>
+		</masterPages>
+		<detailPages>
+			<Page
+				id="detail"
+				title="{i18n>utilizationByProjectDetailTitle}"
+				class="sapUiStdPage"
+			>
+				<content>
+					<ObjectHeader
+						title=""
+						backgroundDesign="Solid"
+						titleActive="false"
+						responsive="true"
+					>
+						<headerContainer>
+							<IconTabBar
+								class="sapUiSmallMarginBottom sapUiResponsiveContentPadding"
+								expandable="false"
+							>
+								<items>
+									<IconTabFilter
+										text="{i18n>plan}"
+										key="plan"
+									>
+										<core:Fragment
+											fragmentName="sap.ui.demo.basicTemplate.view.UtilizationByProjectFragments.PlanEmployeesTable"
+											type="XML"
+										/>
+									</IconTabFilter>
+									<IconTabFilter
+										text="{i18n>reality}"
+										key="reality"
+									>
+										<core:Fragment
+											fragmentName="sap.ui.demo.basicTemplate.view.UtilizationByProjectFragments.RealityEmployeesTable"
+											type="XML"
+										/>
+									</IconTabFilter>
+									<IconTabFilter
+										text="{
+											path: 'i18n>plan',
+											formatter: '.formatter.formatTextNextYear'
+										}"
+										key="plan"
+									>
+										<core:Fragment
+											fragmentName="sap.ui.demo.basicTemplate.view.UtilizationByProjectFragments.PlanNextYearEmployeesTable"
+											type="XML"
+										/>
+									</IconTabFilter>
+								</items>
+							</IconTabBar>
+						</headerContainer>
+					</ObjectHeader>
+				</content>
+			</Page>
+		</detailPages>
+	</SplitApp>
+</mvc:View>

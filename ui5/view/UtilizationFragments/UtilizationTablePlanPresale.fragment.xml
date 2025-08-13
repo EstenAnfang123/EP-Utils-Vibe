@@ -1,0 +1,109 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<Table
+		items="{
+			path: 'detail>/planPresale',
+			sorter: {
+				path: 'subject'
+			}
+		}"
+		growing="true"
+		alternateRowColors="true"
+	>
+		<headerToolbar>
+			<Toolbar>
+				<content>
+					<Title
+						level="H2"
+						text="{i18n>presaleTableTitle}"
+					/>
+					<ToolbarSpacer/>
+				</content>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column width="14em"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{detail>subject}"/>
+					<Input
+						value="{detail>january}"
+						textAlign="Center"
+						submit=".onPresaleSubmit"
+					/>
+					<Input
+						value="{detail>february}"
+						textAlign="Center"
+						submit=".onPresaleSubmit"
+					/>
+					<Input
+						value="{detail>march}"
+						textAlign="Center"
+						submit=".onPresaleSubmit"
+					/>
+					<Input
+						value="{detail>april}"
+						textAlign="Center"
+						submit=".onPresaleSubmit"
+					/>
+					<Input
+						value="{detail>may}"
+						textAlign="Center"
+						submit=".onPresaleSubmit"
+					/>
+					<Input
+						value="{detail>june}"
+						textAlign="Center"
+						submit=".onPresaleSubmit"
+					/>
+					<Input
+						value="{detail>july}"
+						textAlign="Center"
+						submit=".onPresaleSubmit"
+					/>
+					<Input
+						value="{detail>august}"
+						textAlign="Center"
+						submit=".onPresaleSubmit"
+					/>
+					<Input
+						value="{detail>september}"
+						textAlign="Center"
+						submit=".onPresaleSubmit"
+					/>
+					<Input
+						value="{detail>october}"
+						textAlign="Center"
+						submit=".onPresaleSubmit"
+					/>
+					<Input
+						value="{detail>november}"
+						textAlign="Center"
+						submit=".onPresaleSubmit"
+					/>
+					<Input
+						value="{detail>december}"
+						textAlign="Center"
+						submit=".onPresaleSubmit"
+					/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

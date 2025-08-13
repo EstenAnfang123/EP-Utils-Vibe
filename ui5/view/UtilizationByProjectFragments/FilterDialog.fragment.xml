@@ -1,0 +1,43 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<ViewSettingsDialog confirm=".handleFilterDialogConfirm">
+		<filterItems>
+			<ViewSettingsFilterItem
+				id="idTMFix"
+				text="{i18n>tmFix}"
+				key="tmFix"
+			>
+				<items>
+					<ViewSettingsItem
+						text="T&amp;M"
+						key="T&amp;M"
+						selected="true"
+					/>
+					<ViewSettingsItem
+						text="FIX"
+						key="FIX"
+						selected="true"
+					/>
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem
+				id="idManagers"
+				text="{i18n>managers}"
+				key="managerId"
+				items="{metadata>/managers}"
+			>
+				<items>
+					<ViewSettingsItem
+						text="{
+							parts: ['metadata>firstname', 'metadata>lastname']
+						}"
+						key="{metadata>id}"
+						selected="{= ${metadata>id} === ${metadata>/user/id}}"
+					/>
+				</items>
+			</ViewSettingsFilterItem>
+		</filterItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

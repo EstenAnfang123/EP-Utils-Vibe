@@ -1,0 +1,51 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<Table
+		headerText="{i18n>realityPlanTableTitle}"
+		items="{
+			path: 'detail>/realRealPlan',
+			sorter: {
+				path: 'name'
+			}
+		}"
+		growing="true"
+		alternateRowColors="true"
+	>
+		<columns>
+			<Column width="16em"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{detail>name}"/>
+					<Text text="{detail>january}"/>
+					<Text text="{detail>february}"/>
+					<Text text="{detail>march}"/>
+					<Text text="{detail>april}"/>
+					<Text text="{detail>may}"/>
+					<Text text="{detail>june}"/>
+					<Text text="{detail>july}"/>
+					<Text text="{detail>august}"/>
+					<Text text="{detail>september}"/>
+					<Text text="{detail>october}"/>
+					<Text text="{detail>november}"/>
+					<Text text="{detail>december}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

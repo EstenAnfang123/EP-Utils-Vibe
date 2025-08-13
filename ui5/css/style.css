@@ -1,0 +1,34 @@
+.button-right {
+    float: right;
+    margin: 20px;
+}
+
+.combobox-projects {
+    margin: 20px;
+}
+
+.cell-color-red {
+    color: red!important;
+}
+
+.redBoldText input {
+	color: red !important;
+	font-weight: bold !important;
+}
+
+ input[data-negative="true"] {
+	color: red !important;
+	font-weight: bold !important;
+}
+
+tr[data-negative="true"] {
+  background-color: #faa !important;
+}
+
+.red {  
+     background-color: #FF3300;  
+        }  
+
+.sapMListTblFooter .sapMText {
+	font-weight: bold;
+}

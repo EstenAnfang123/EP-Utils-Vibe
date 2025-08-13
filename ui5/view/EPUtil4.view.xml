@@ -1,0 +1,11 @@
+<mvc:View
+	controllerName="sap.ui.demo.basicTemplate.controller.EPUtil4"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page id="pageEPUtil4" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<Button icon="sap-icon://download" text="Download Excel" press="onDataExport" tooltip="{i18n>download}" id="download" class="sapUiResponsiveMargin"/>
+		</content>
+	</Page>
+</mvc:View>

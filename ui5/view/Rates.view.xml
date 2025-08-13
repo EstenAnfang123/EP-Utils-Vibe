@@ -1,0 +1,76 @@
+<mvc:View
+	controllerName="sap.ui.demo.basicTemplate.controller.Rates"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:table="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		id="pageRates"
+		title="{i18n>ratesTitle}"
+		showNavButton="true"
+		navButtonPress="onNavBack">
+		<headerContent>
+			<ObjectStatus text="{path: '/', formatter: '.formatter.totalProjects'}"/>
+		</headerContent>
+		<content>
+			<table:TreeTable 
+			id="ratesTable" 
+			enableSelectAll="false"
+			visibleRowCountMode="Auto"
+			selectionMode="None"
+			rows="{
+				path: '/',
+				parameters: {arrayNames: ['rates']}
+			}">
+				<table:extension>
+                    <OverflowToolbar style="Clear">
+                        <Title id="title" text="Sazby"/>
+                        <ToolbarSpacer/>
+						<!--<SearchField search="onSearch" width="17.5rem" placeholder="Hledat jméno projektu"/>-->
+                        <Button text="Collapse all" press="onCollapseAll"/>
+						<Button icon="sap-icon://synchronize" press="onDataRefresh"/>
+                    </OverflowToolbar>
+                </table:extension>
+				<table:columns>
+				<table:Column width="6rem">
+						<Label text="ID"/>
+						<table:template>
+							<Text text="{projectId}"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Projekt"/>
+						<table:template>
+							<Text text="{projectName}"/>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Uživatel"/>
+						<table:template>
+							<Text text="{_attributes/name}"/>
+						</table:template>
+					</table:Column>
+					<table:Column filterProperty="{_attributes/name}">
+						<Label text="Sazba"/>
+						<table:template>
+							<Input
+								type="Number"
+								description="{easy_currency_code}"
+								value="{ path: 'unit_rate' }"
+								visible="{= ${_attributes/name} ? true : false}"
+								width="200px"
+								textAlign="Center" 
+								change="onInputChanged"/>
+						</table:template>
+					</table:Column>
+					<table:Column filterProperty="{_attributes/name}">
+						<Label text="Akce"/>
+						<table:template>
+							<Button text="Zapsat" type="{buttonType}" press="onEnter" visible="{= ${_attributes/name} ? true : false}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+			</table:TreeTable>
+		</content>
+	</Page>
+</mvc:View>

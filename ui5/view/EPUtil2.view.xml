@@ -1,0 +1,48 @@
+<mvc:View
+	controllerName="sap.ui.demo.basicTemplate.controller.EPUtil2"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page id="pageEPUtil2" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+
+			<Table id="projectTable" growing="true" growingThreshold="50" inset="false" items="{path: 'data>/', sorter: [{path: 'supplier', group: true}]}" enableBusyIndicator="true">
+				<columns>
+					<Column
+						hAlign="Center">
+						<Text text="Dodavatel" />
+					</Column>
+					<Column
+						hAlign="Center">
+						<Text text="Projekt" />
+					</Column>
+					<Column
+						hAlign="Center">
+						<Text text="Vykazuje" />
+						<footer><Text id="totalRows" text="Celkem: {path: 'data>/', formatter: '.formatter.totalRows'}"/></footer>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{data>supplier}" />
+							<Text text="{data>projectName}{i18n>newLine}{i18n>newLine}{data>projectId}" />
+							<RadioButtonGroup id="rbg1" columns="3" select="onSelectionChanged">
+								<RadioButton id="RB1-0" text="Nic" />
+								<RadioButton id="RB1-1" text="Ano" />
+								<RadioButton id="RB1-2" text="Ne" />
+							</RadioButtonGroup>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+
+		<footer>
+			<Toolbar class="sapUiMediumMarginTop" id="footerToolbar">
+				<ToolbarSpacer/>
+				<Button type="Emphasized" text="Aktualizovat" press="onPress"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

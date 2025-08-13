@@ -1,0 +1,268 @@
+<mvc:View
+	controllerName="sap.ui.demo.basicTemplate.controller.Utilization"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+>
+	<SplitApp id="pageUtilization">
+		<masterPages>
+			<Page
+				id="master"
+				showNavButton="true"
+				navButtonPress=".onNavBack"
+				xmlns:core="sap.ui.core"
+				core:require="{
+					formatMessage: 'sap/base/strings/formatMessage'
+				}"
+				title="{
+					parts: [{
+						path: 'i18n>utilizationMasterTitle'
+					}, {
+						path: '/metadata/usersCount'
+					}],
+					formatter: '.formatter.itemsCount'
+				}"
+				class="sapUiStdPage"
+			>
+				<headerContent>
+					<MenuButton icon="sap-icon://menu2">
+						<menu>
+							<Menu>
+								<items>
+									<MenuItem
+										icon="sap-icon://excel-attachment"
+										text="{i18n>export}"
+									>
+										<items>
+											<MenuItem
+												icon="sap-icon://group"
+												text="{i18n>freeCapacitiesOverview}"
+												press=".onExportAvailableCapacityPress"
+											/>
+											<MenuItem
+												icon="sap-icon://group"
+												text="{
+													path: 'i18n>freeCapacitiesOverview',
+													formatter: '.formatter.formatTextNextYear'
+												}"
+												press=".onExportAvailableCapacityNextYearPress"
+											/>
+											<MenuItem
+												icon="sap-icon://group"
+												text="{
+													path: 'i18n>reality'
+												}"
+												press=".onExportRealityAllUsers"
+											/>
+											<MenuItem
+												icon="sap-icon://group"
+												text="{
+													path: 'i18n>reality',
+													formatter: '.formatter.formatTextPrevYear'
+												}"
+												press=".onExportRealityAllUsersPrev"
+											/>
+											<MenuItem
+												icon="sap-icon://company-view"
+												text="{
+													path: 'i18n>projectAndOffersPlan'
+												}"
+												press=".onExportPlansAndOffersPress"
+											/>
+											<MenuItem
+												icon="sap-icon://company-view"
+												text="{
+													path: 'i18n>projectAndOffersPlan',
+													formatter: '.formatter.formatTextNextYear'
+												}"
+												press=".onExportPlansAndOffersNextYearPress"
+											/>
+										</items>
+									</MenuItem>
+								</items>
+							</Menu>
+						</menu>
+					</MenuButton>
+				</headerContent>
+				<List
+					id="usersList"
+					items="{
+						path: '/users'
+					}"
+					growing="true"
+					growingScrollToLoad="true"
+					mode="SingleSelectMaster"
+					itemPress=".onPressUsersItem"
+				>
+					<headerToolbar>
+						<Toolbar>
+							<content>
+								<SearchField
+									placeholder="{i18n>utilizationSearchFieldPlaceholder}"
+									search=".onSearch"
+									liveChange=".onSearch"
+								/>
+								<Button
+									icon="sap-icon://synchronize"
+									press=".onRefreshUsersPress"
+								/>
+							</content>
+						</Toolbar>
+					</headerToolbar>
+					<items>
+						<ObjectListItem
+							title="{
+								parts: [{
+									path: 'firstname'
+								}, {
+									path: 'lastname'
+								}]
+							}"
+							type="Active"
+						>
+							<attributes>
+								<ObjectAttribute text="{
+									path: 'custom_fields/custom_field',
+									formatter: '.formatter.userRelationship'
+								}"/>
+							</attributes>
+							<firstStatus>
+								<ObjectStatus text="{main_competence}"/>
+							</firstStatus>
+						</ObjectListItem>
+					</items>
+				</List>
+				<footer>
+					<OverflowToolbar
+						width="100%"
+						height="46px"
+					>
+						<content>
+							<ToolbarSpacer/>
+							<Button
+								icon="sap-icon://sort"
+								press="handleSortButtonPressed"
+							/>
+							<Button
+								icon="sap-icon://group-2"
+								press="handleGroupButtonPressed"
+							/>
+						</content>
+					</OverflowToolbar>
+				</footer>
+				<headerContent/>
+			</Page>
+		</masterPages>
+		<detailPages>
+			<Page
+				id="detail"
+				title="{i18n>utilizationDetailTitle}"
+				class="sapUiStdPage"
+			>
+				<content>
+					<ObjectHeader
+						title="{
+							parts: [{
+								path: 'detail>/user/firstname'
+							}, {
+								path: 'detail>/user/lastname'
+							}]
+						}"
+						backgroundDesign="Solid"
+						titleActive="false"
+						responsive="true"
+					>
+						<headerContainer>
+							<IconTabBar
+								class="sapUiSmallMarginBottom sapUiResponsiveContentPadding"
+								expandable="false"
+							>
+								<items>
+									<IconTabFilter
+										text="{i18n>plan}"
+										key="plan"
+									>
+										<core:Fragment
+											fragmentName="sap.ui.demo.basicTemplate.view.UtilizationFragments.UtilizationTablePlanEval"
+											type="XML"
+										/>
+										<core:Fragment
+											fragmentName="sap.ui.demo.basicTemplate.view.UtilizationFragments.UtilizationTablePlanProjects"
+											type="XML"
+										/>
+										<core:Fragment
+											fragmentName="sap.ui.demo.basicTemplate.view.UtilizationFragments.UtilizationTablePlanOffers"
+											type="XML"
+										/>
+										<core:Fragment
+											fragmentName="sap.ui.demo.basicTemplate.view.UtilizationFragments.UtilizationTablePlanPresale"
+											type="XML"
+										/>
+										<!-- <core:Fragment
+										fragmentName="sap.ui.demo.basicTemplate.view.UtilizationFragments.UtilizationTablePlanOpportunities"
+										type="XML"
+									/> -->
+									</IconTabFilter>
+									<IconTabFilter
+										text="{i18n>reality}"
+										key="reality"
+									>
+										<core:Fragment
+											fragmentName="sap.ui.demo.basicTemplate.view.UtilizationFragments.UtilizationTableRealityEval"
+											type="XML"
+										/>
+										<core:Fragment
+											fragmentName="sap.ui.demo.basicTemplate.view.UtilizationFragments.UtilizationTableRealityReality"
+											type="XML"
+										/>
+									</IconTabFilter>
+									<IconTabFilter
+										text="{
+											path: 'i18n>reality',
+											formatter: '.formatter.formatTextPrevYear'
+										}"
+										key="prevReality"
+									>
+										<core:Fragment
+											fragmentName="sap.ui.demo.basicTemplate.view.UtilizationFragments.UtilizationTableRealityEvalPrev"
+											type="XML"
+										/>
+										<core:Fragment
+											fragmentName="sap.ui.demo.basicTemplate.view.UtilizationFragments.UtilizationTableRealityRealityPrev"
+											type="XML"
+										/>
+									</IconTabFilter>
+									<IconTabFilter
+										text="{
+											path: 'i18n>nextYearPlan',
+											formatter: '.formatter.formatTextNextYear'
+										}"
+										key="nextYearPlan"
+									>
+										<core:Fragment
+											fragmentName="sap.ui.demo.basicTemplate.view.UtilizationFragments.UtilizationTablePlanEvalNext"
+											type="XML"
+										/>
+										<core:Fragment
+											fragmentName="sap.ui.demo.basicTemplate.view.UtilizationFragments.UtilizationTablePlanProjectsNext"
+											type="XML"
+										/>
+										<core:Fragment
+											fragmentName="sap.ui.demo.basicTemplate.view.UtilizationFragments.UtilizationTablePlanOffersNext"
+											type="XML"
+										/>
+										<core:Fragment
+											fragmentName="sap.ui.demo.basicTemplate.view.UtilizationFragments.UtilizationTablePlanPresaleNext"
+											type="XML"
+										/>
+									</IconTabFilter>
+								</items>
+							</IconTabBar>
+						</headerContainer>
+					</ObjectHeader>
+				</content>
+			</Page>
+		</detailPages>
+	</SplitApp>
+</mvc:View>

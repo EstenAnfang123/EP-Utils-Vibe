@@ -1,0 +1,209 @@
+{
+	"_version": "1.12.0",
+	"sap.app": {
+		"id": "sap.ui.demo.basicTemplate",
+		"type": "application",
+		"i18n": {
+			"bundleUrl": "i18n/i18n.properties",
+			"supportedLocales": [""],
+			"fallbackLocale": ""
+		},
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"resources": "resources.json",
+		"ach": "ach"
+	},
+
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "sap.ui.demo.basicTemplate.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.60.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "sap.ui.demo.basicTemplate.i18n.i18n",
+					"supportedLocales": [""],
+					"fallbackLocale": ""
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "sap.ui.demo.basicTemplate.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"async": true
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "main",
+					"target": ["main"]
+				},
+				{
+					"pattern": "eso",
+					"name": "eso",
+					"target": ["eso"]
+				},
+				{
+					"pattern": "eputil2",
+					"name": "eputil2",
+					"target": "eputil2"
+				},
+				{
+					"pattern": "eputil3",
+					"name": "eputil3",
+					"target": "eputil3"
+				},
+				{
+					"pattern": "eputil4",
+					"name": "eputil4",
+					"target": "eputil4"
+				},
+				{
+					"pattern": "rates",
+					"name": "rates",
+					"target": "rates"
+				},
+				{
+					"pattern": "bonuses",
+					"name": "bonuses",
+					"target": "bonuses"
+				},
+				{
+					"pattern": "overview",
+					"name": "projectsOverview",
+					"target": "projectsOverview"
+				},
+				{
+					"pattern": "utilization",
+					"name": "utilization",
+					"target": "utilization"
+				},
+				{
+					"pattern": "utilizationByProject",
+					"name": "utilizationByProject",
+					"target": "utilizationByProject"
+				},
+				{
+					"pattern": "utilizationByOffer",
+					"name": "utilizationByOffer",
+					"target": "utilizationByOffer"
+				}
+			],
+			"targets": {
+				"eso": {
+					"viewName": "Eso",
+					"viewId": "eso",
+					"viewLevel": 1,
+					"title": "{i18n>title}"
+				},
+				"main": {
+					"viewName": "Main",
+					"viewId": "main",
+					"viewLevel": 1,
+					"title": "{i18n>title}"
+				},
+				"eputil2": {
+					"viewName": "EPUtil2",
+					"viewId": "eputil2",
+					"viewLevel": 1,
+					"title": "{i18n>title}"
+				},
+				"eputil3": {
+					"viewName": "EPUtil3",
+					"viewId": "eputil3",
+					"viewLevel": 1,
+					"title": "{i18n>title}"
+				},
+				"eputil4": {
+					"viewName": "EPUtil4",
+					"viewId": "eputil4",
+					"viewLevel": 1,
+					"title": "{i18n>title}"
+				},
+				"rates": {
+					"viewName": "Rates",
+					"viewId": "rates",
+					"viewLevel": 1,
+					"title": "{i18n>title}"
+				},
+				"bonuses": {
+					"viewName": "Bonuses",
+					"viewId": "bonuses",
+					"viewLevel": 1,
+					"title": "{i18n>title}"
+				},
+				"projectsOverview": {
+					"viewName": "ProjectsOverview",
+					"viewId": "projectsOverview",
+					"viewLevel": 1,
+					"title": "{i18n>title}"
+				},
+				"utilization": {
+					"viewName": "Utilization",
+					"viewId": "utilization",
+					"viewLevel": 1,
+					"title": "{i18n>title}"
+				},
+				"utilizationByProject": {
+					"viewName": "UtilizationByProject",
+					"viewId": "utilizationByProject",
+					"viewLevel": 1,
+					"title": "{i18n>title}"
+				},
+				"utilizationByOffer": {
+					"viewName": "UtilizationByOffer",
+					"viewId": "utilizationByOffer",
+					"viewLevel": 1,
+					"title": "{i18n>title}"
+				}
+			}
+		}
+	}
+}

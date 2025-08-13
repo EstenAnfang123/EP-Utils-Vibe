@@ -1,0 +1,187 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<Table growing="true" items="{
+		path: 'detail>/workersPlan',
+		sorter: {
+			path: 'sortWeight'
+		}
+	}">
+		<headerToolbar>
+			<Toolbar>
+				<content>
+					<Title
+						level="H2"
+						text="{i18n>workersTableTitle}"
+					/>
+					<ToolbarSpacer/>
+					<Button
+						icon="sap-icon://synchronize"
+						type="Transparent"
+						visible="{= ${detail>/workersPlan}.length > 0}"
+						press=".onRefreshProjectPress"
+					/>
+				</content>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column width="16em">
+				<Label
+					design="Bold"
+					text="{i18n>month}"
+				/>
+			</Column>
+			<Column hAlign="Center">
+				<Label
+					design="Bold"
+					text="{i18n>total}"
+				/>
+			</Column>
+			<Column hAlign="Center">
+				<Label
+					design="Bold"
+					text="{i18n>january}"
+				/>
+			</Column>
+			<Column hAlign="Center">
+				<Label
+					design="Bold"
+					text="{i18n>february}"
+				/>
+			</Column>
+			<Column hAlign="Center">
+				<Label
+					design="Bold"
+					text="{i18n>march}"
+				/>
+			</Column>
+			<Column hAlign="Center">
+				<Label
+					design="Bold"
+					text="{i18n>april}"
+				/>
+			</Column>
+			<Column hAlign="Center">
+				<Label
+					design="Bold"
+					text="{i18n>may}"
+				/>
+			</Column>
+			<Column hAlign="Center">
+				<Label
+					design="Bold"
+					text="{i18n>june}"
+				/>
+			</Column>
+			<Column hAlign="Center">
+				<Label
+					design="Bold"
+					text="{i18n>july}"
+				/>
+			</Column>
+			<Column hAlign="Center">
+				<Label
+					design="Bold"
+					text="{i18n>august}"
+				/>
+			</Column>
+			<Column hAlign="Center">
+				<Label
+					design="Bold"
+					text="{i18n>september}"
+				/>
+			</Column>
+			<Column hAlign="Center">
+				<Label
+					design="Bold"
+					text="{i18n>october}"
+				/>
+			</Column>
+			<Column hAlign="Center">
+				<Label
+					design="Bold"
+					text="{i18n>november}"
+				/>
+			</Column>
+			<Column hAlign="Center">
+				<Label
+					design="Bold"
+					text="{i18n>december}"
+				/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem class = "red">
+				<cells>
+					<Text text="{detail>name}"/>
+					<Input
+						value="{detail>totalPlanned}"
+						textAlign="Center"
+						submit=".onProjectUsersSubmit"
+					/>
+					<Input
+						value="{detail>january}"
+						textAlign="Center"
+						submit=".onProjectUsersSubmit"
+					/>
+					<Input
+						value="{detail>february}"
+						textAlign="Center"
+						submit=".onProjectUsersSubmit"
+					/>
+					<Input
+						value="{detail>march}"
+						textAlign="Center"
+						submit=".onProjectUsersSubmit"
+					/>
+					<Input
+						value="{detail>april}"
+						textAlign="Center"
+						submit=".onProjectUsersSubmit"
+					/>
+					<Input
+						value="{detail>may}"
+						textAlign="Center"
+						submit=".onProjectUsersSubmit"
+					/>
+					<Input
+						value="{detail>june}"
+						textAlign="Center"
+						submit=".onProjectUsersSubmit"
+					/>
+					<Input
+						value="{detail>july}"
+						textAlign="Center"
+						submit=".onProjectUsersSubmit"
+					/>
+					<Input
+						value="{detail>august}"
+						textAlign="Center"
+						submit=".onProjectUsersSubmit"
+					/>
+					<Input
+						value="{detail>september}"
+						textAlign="Center"
+						submit=".onProjectUsersSubmit"
+					/>
+					<Input
+						value="{detail>october}"
+						textAlign="Center"
+						submit=".onProjectUsersSubmit"
+					/>
+					<Input
+						value="{detail>november}"
+						textAlign="Center"
+						submit=".onProjectUsersSubmit"
+					/>
+					<Input
+						value="{detail>december}"
+						textAlign="Center"
+						submit=".onProjectUsersSubmit"
+					/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

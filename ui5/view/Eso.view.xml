@@ -1,0 +1,76 @@
+<mvc:View
+	controllerName="sap.ui.demo.basicTemplate.controller.Eso"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page id="pageEso" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<!-- <ComboBox id="projectsComboBox" items="{path: 'projects>/projects'}" change="onChange" placeholder="Projekt" class="sapUiLargeMarginEnd combobox-projects">
+				<items>
+					<core:Item key="{projects>id}" text="{projects>name}"/>
+				</items>
+			</ComboBox> -->
+
+			<MultiComboBox
+				id="projectsComboBox"
+				placeholder="Všechny projekty"
+				class="sapUiLargeMarginEnd combobox-projects"
+				selectionFinish="onChange"
+				width="300px"
+				items="{path: 'projects>/projects'}">
+				<core:Item key="{projects>id}" text="{projects>name}"/>
+			</MultiComboBox>
+				
+			<!-- <Button text="Press" class="button-right" press="onPress"/> -->
+
+			<Table id="projectTable" growing="true" growingThreshold="50" inset="false" items="{path: 'data>/', sorter: [{path: 'supplier', group: true}]}" enableBusyIndicator="true">
+				<columns>
+					<Column
+						width="8em">
+						<Text text="ID" />
+					</Column>
+					<Column>
+						<Text text="Datum" />
+					</Column>
+					<Column
+						hAlign="Center">
+						<Text text="Jméno" />
+					</Column>
+					<Column
+						hAlign="Center">
+						<Text text="Částka bez DPH" />
+					</Column>
+					<Column
+						hAlign="End">
+						<Text text="VAT" />
+					</Column>
+					<Column
+						hAlign="End">
+						<Text text="Eso" />
+						<footer><Text id="totalRows" text="Celkem: {path: 'data>/', formatter: '.formatter.totalRows'}"/></footer>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier text="{data>id}{data>status}"/>
+							<Text text="{data>date}" />
+							<Text text="{data>name}" />
+							<ObjectNumber number="{data>price2}" unit="{data>currency}" />
+							<ObjectNumber number="{data>vat}%"/>
+							<ObjectNumber number="{data>eso}" unit="{data>currency}" />
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+
+		<footer>
+			<Toolbar class="sapUiMediumMarginTop" id="footerToolbar">
+				<ToolbarSpacer/>
+				<Button type="Emphasized" text="Aktualizovat" press="onPress"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

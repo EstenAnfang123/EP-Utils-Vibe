@@ -1,0 +1,109 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<Table
+		items="{
+			path: 'detail>/planProjects',
+			sorter: {
+				path: 'name'
+			}
+		}"
+		growing="true"
+		alternateRowColors="true"
+	>
+		<headerToolbar>
+			<Toolbar>
+				<content>
+					<Title
+						level="H2"
+						text="{i18n>projectsTableTitle}"
+					/>
+					<ToolbarSpacer/>
+				</content>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column width="14em"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{detail>name}"/>
+					<Input
+						value="{detail>january}"
+						textAlign="Center"
+						submit=".onProjectsSubmit"
+					/>
+					<Input
+						value="{detail>february}"
+						textAlign="Center"
+						submit=".onProjectsSubmit"
+					/>
+					<Input
+						value="{detail>march}"
+						textAlign="Center"
+						submit=".onProjectsSubmit"
+					/>
+					<Input
+						value="{detail>april}"
+						textAlign="Center"
+						submit=".onProjectsSubmit"
+					/>
+					<Input
+						value="{detail>may}"
+						textAlign="Center"
+						submit=".onProjectsSubmit"
+					/>
+					<Input
+						value="{detail>june}"
+						textAlign="Center"
+						submit=".onProjectsSubmit"
+					/>
+					<Input
+						value="{detail>july}"
+						textAlign="Center"
+						submit=".onProjectsSubmit"
+					/>
+					<Input
+						value="{detail>august}"
+						textAlign="Center"
+						submit=".onProjectsSubmit"
+					/>
+					<Input
+						value="{detail>september}"
+						textAlign="Center"
+						submit=".onProjectsSubmit"
+					/>
+					<Input
+						value="{detail>october}"
+						textAlign="Center"
+						submit=".onProjectsSubmit"
+					/>
+					<Input
+						value="{detail>november}"
+						textAlign="Center"
+						submit=".onProjectsSubmit"
+					/>
+					<Input
+						value="{detail>december}"
+						textAlign="Center"
+						submit=".onProjectsSubmit"
+					/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

@@ -1,0 +1,498 @@
+<mvc:View
+	controllerName="sap.ui.demo.basicTemplate.controller.ProjectsOverview"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	height="100%"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:layout="sap.ui.layout"
+>
+	<App>
+		<f:FlexibleColumnLayout
+			id="fcl"
+			layout="{layout>/layout}"
+			backgroundDesign="Solid"
+		>
+			<f:beginColumnPages>
+				<Page
+					title="Projekty ({projects>/projectsCount})"
+					showNavButton="true"
+					navButtonPress="onNavBack"
+				>
+					<Table
+						id="projectsTable"
+						mode="SingleSelectMaster"
+						growing="true"
+						growingScrollToLoad="false"
+						noDataText="Žádná data"
+						itemPress="onSelectProject"
+						inset="true"
+						alternateRowColors="true"
+						items="{
+							path: 'projects>/data',
+							sorter: {
+								path: 'name'
+							}
+						}"
+						class="sapFDynamicPageAlignContent"
+						width="auto"
+					>
+						<headerToolbar>
+							<OverflowToolbar>
+								<ToolbarSpacer/>
+								<SearchField
+									placeholder="{i18n>searchFieldPlaceholder}"
+									search="onSearchPress"
+									width="300px"
+								/>
+								<Button
+									tooltip="Filter"
+									icon="sap-icon://filter"
+									press="handleFilterButtonPressed"
+								/>
+								<Button
+									tooltip="Export excel"
+									icon="sap-icon://excel-attachment"
+									press="handleExportButtonPressed"
+								/>
+								<Button
+									icon="sap-icon://synchronize"
+									press="handleRefreshData"
+								/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="5em">
+								<Text text="ID"/>
+								<!--<footer>
+									<Text text="Celkově"/>
+								</footer>-->
+							</Column>
+							<Column>
+								<Text text="Projekt"/>
+							</Column>
+							<Column
+								hAlign="End"
+								minScreenWidth="Tablet"
+							>
+								<Text text="Plánovaný obrat"/>
+								<!--<footer>
+									<Text text="{projects>/sumExpectedRevenue}"/>
+								</footer>-->
+							</Column>
+							<Column
+								hAlign="End"
+								minScreenWidth="Tablet"
+							>
+								<Text text="Skutečný obrat"/>
+								<!--<footer>
+									<Text text="2"/>
+								</footer>-->
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem type="Navigation">
+								<cells>
+									<Link
+										text="{projects>id}"
+										press="onLinkPress"
+									/>
+									<ObjectIdentifier title="{projects>name}"/>
+									<ObjectNumber
+										number="{
+											parts: [{
+												path: 'projects>expectedRevenue'
+											}, {
+												path: 'projects>currency'
+											}],
+											type: 'sap.ui.model.type.Currency',
+											formatOptions: {
+												showMeasure: false
+											}
+										}"
+										unit="{projects>currency}"
+									/>
+									<ObjectNumber
+										number="{
+											parts: [{
+												path: 'projects>realRevenue'
+											}, {
+												path: 'projects>currency'
+											}],
+											type: 'sap.ui.model.type.Currency',
+											formatOptions: {
+												showMeasure: false
+											}
+										}"
+										unit="{projects>currency}"
+									/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</Page>
+			</f:beginColumnPages>
+			<f:midColumnPages>
+				<Page
+					title="Detail"
+					class="sapUiResponsivePadding--header"
+					busy="{detailPage>/busy}"
+				>
+					<content>
+						<ObjectHeader
+							title="{selectedProject>/name}"
+							backgroundDesign="Solid"
+						>
+							<attributes>
+								<ObjectAttribute
+									active="true"
+									press="onLinkPress"
+									text="{
+										parts: [{
+											path: 'selectedProject>/id'
+										}],
+										type: 'sap.ui.model.type.String'
+									}"
+								/>
+								<ObjectAttribute text="{
+									parts: [{
+										path: 'selectedProject>/'
+									}],
+									type: 'sap.ui.model.type.String',
+									formatter: '.formatter.findTMFIX'
+								}"/>
+							</attributes>
+							<statuses>
+								<ObjectStatus
+									text="{
+										path: 'selectedProject>/',
+										formatter: '.formatter.percentDone'
+									}"
+									state="Success"
+								/>
+							</statuses>
+						</ObjectHeader>
+						<form:SimpleForm
+							layout="ResponsiveGridLayout"
+							class="sapUiForceWidthAuto sapUiResponsiveMargin"
+						>
+							<form:title>
+								<core:Title text="1"/>
+							</form:title>
+							<Label text="Výnosově">
+								<layoutData>
+									<layout:GridData span="L2 M2"/>
+								</layoutData>
+							</Label>
+							<Text text="{
+								parts: [{
+									path: 'budget>/projectRevenue'
+								}, {
+									path: 'selectedProject>/currency'
+								}],
+								type: 'sap.ui.model.type.Currency',
+								formatOptions: {
+									showMeasure: true
+								}
+							}">
+								<layoutData>
+									<layout:GridData span="L10 M10"/>
+								</layoutData>
+							</Text>
+							<Label text="Plánovaný obrat">
+								<layoutData>
+									<layout:GridData span="L2 M2"/>
+								</layoutData>
+							</Label>
+							<Text text="{
+								parts: [{
+									path: 'selectedProject>/expectedRevenue'
+								}, {
+									path: 'selectedProject>/currency'
+								}],
+								type: 'sap.ui.model.type.Currency',
+								formatOptions: {
+									showMeasure: true
+								}
+							}">
+								<layoutData>
+									<layout:GridData span="L4 M4"/>
+								</layoutData>
+							</Text>
+							<Label
+								design="Bold"
+								text="Skutečný obrat"
+							>
+								<layoutData>
+									<layout:GridData span="L2 M2"/>
+								</layoutData>
+							</Label>
+							<Text text="{
+								parts: [{
+									path: 'selectedProject>/realRevenue'
+								}, {
+									path: 'selectedProject>/currency'
+								}],
+								type: 'sap.ui.model.type.Currency',
+								formatOptions: {
+									showMeasure: true
+								}
+							}">
+								<layoutData>
+									<layout:GridData span="L4 M4"/>
+								</layoutData>
+							</Text>
+							<Label text="Plánovaný zisk">
+								<layoutData>
+									<layout:GridData span="L2 M2"/>
+								</layoutData>
+							</Label>
+							<Text text="{
+								parts: [{
+									path: 'expectedRevenue>/expectedRevenue'
+								}, {
+									path: 'selectedProject>/currency'
+								}],
+								type: 'sap.ui.model.type.Currency',
+								formatOptions: {
+									showMeasure: true
+								}
+							}">
+								<layoutData>
+									<layout:GridData span="L4 M4"/>
+								</layoutData>
+							</Text>
+							<Label text="Skutečný zisk">
+								<layoutData>
+									<layout:GridData span="L2 M2"/>
+								</layoutData>
+							</Label>
+							<Text text="{
+								parts: [{
+									path: 'budget>/realProfit'
+								}, {
+									path: 'selectedProject>/currency'
+								}],
+								type: 'sap.ui.model.type.Currency',
+								formatOptions: {
+									showMeasure: true
+								}
+							}">
+								<layoutData>
+									<layout:GridData span="L4 M4"/>
+								</layoutData>
+							</Text>
+							<Text text="">
+								<layoutData>
+									<layout:GridData span="L12 M12"/>
+								</layoutData>
+							</Text>
+							<Label
+								design="Bold"
+								text="Přijde"
+							>
+								<layoutData>
+									<layout:GridData span="L8 M8"/>
+								</layoutData>
+							</Label>
+							<ObjectStatus
+								state="{:= ${budget>/willCome} &lt; 0 ? 'Error':'None'}"
+								text="{
+									parts: [{
+										path: 'budget>/willCome'
+									}, {
+										path: 'selectedProject>/currency'
+									}],
+									type: 'sap.ui.model.type.Currency',
+									formatOptions: {
+										showMeasure: true
+									}
+								}"
+							>
+								<layoutData>
+									<layout:GridData span="L4 M4"/>
+								</layoutData>
+							</ObjectStatus>
+						</form:SimpleForm>
+						<form:SimpleForm
+							layout="ResponsiveGridLayout"
+							class="sapUiForceWidthAuto sapUiResponsiveMargin"
+						>
+							<form:title>
+								<core:Title text="2"/>
+							</form:title>
+							<Label text="Úkoly celkem">
+								<layoutData>
+									<layout:GridData span="L2 M2"/>
+								</layoutData>
+							</Label>
+							<Text text="{
+								parts: [{
+									path: 'selectedProject>/sum_estimated_hours'
+								}],
+								formatter: '.formatter.formatHours'
+							}">
+								<layoutData>
+									<layout:GridData span="L10 M10"/>
+								</layoutData>
+							</Text>
+							<Label text="Odpracováno">
+								<layoutData>
+									<layout:GridData span="L2 M2"/>
+								</layoutData>
+							</Label>
+							<Text text="{
+								parts: [{
+									path: 'selectedProject>/sum_time_entries'
+								}],
+								formatter: '.formatter.formatHours'
+							}">
+								<layoutData>
+									<layout:GridData span="L10 M10"/>
+								</layoutData>
+							</Text>
+							<Text text="">
+								<layoutData>
+									<layout:GridData span="L12 M12"/>
+								</layoutData>
+							</Text>
+							<Label
+								design="Bold"
+								text="K práci"
+							>
+								<layoutData>
+									<layout:GridData span="L8 M8"/>
+								</layoutData>
+							</Label>
+							<ObjectStatus
+								state="{:= ${selectedProject>/sum_estimated_hours} &lt; ${selectedProject>/sum_time_entries} ? 'Error':'None'}"
+								text="{
+									parts: [{
+										path: 'selectedProject>/sum_estimated_hours'
+									}, {
+										path: 'selectedProject>/sum_time_entries'
+									}],
+									formatter: '.formatter.hoursLeft'
+								}"
+							>
+								<layoutData>
+									<layout:GridData span="L4 M4"/>
+								</layoutData>
+							</ObjectStatus>
+						</form:SimpleForm>
+						<form:SimpleForm
+							layout="ResponsiveGridLayout"
+							class="sapUiForceWidthAuto sapUiResponsiveMargin"
+						>
+							<form:title>
+								<core:Title text="3"/>
+							</form:title>
+							<Label text="Nákladově">
+								<layoutData>
+									<layout:GridData span="L2 M2"/>
+								</layoutData>
+							</Label>
+							<Text text="{
+								parts: [{
+									path: 'budget>/projectExpense'
+								}, {
+									path: 'selectedProject>/currency'
+								}],
+								type: 'sap.ui.model.type.Currency',
+								formatOptions: {
+									showMeasure: true
+								}
+							}">
+								<layoutData>
+									<layout:GridData span="L4 M4"/>
+								</layoutData>
+							</Text>
+							<Label text="Výnosově">
+								<layoutData>
+									<layout:GridData span="L2 M2"/>
+								</layoutData>
+							</Label>
+							<Text text="{
+								parts: [{
+									path: 'budget>/projectRevenue'
+								}, {
+									path: 'selectedProject>/currency'
+								}],
+								type: 'sap.ui.model.type.Currency',
+								formatOptions: {
+									showMeasure: true
+								}
+							}">
+								<layoutData>
+									<layout:GridData span="L4 M4"/>
+								</layoutData>
+							</Text>
+							<Text text="">
+								<layoutData>
+									<layout:GridData span="L12 M12"/>
+								</layoutData>
+							</Text>
+							<Label
+								design="Bold"
+								text="K fakturaci"
+							>
+								<layoutData>
+									<layout:GridData span="L8 M8"/>
+								</layoutData>
+							</Label>
+							<ObjectStatus
+								state="{:= (${budget>/projectRevenue} - ${selectedProject>/realRevenue}) &lt; 0 ? 'Error' : 'None'}"
+								text="{
+									parts: [{
+										path: 'budget>/projectRevenue'
+									}, {
+										path: 'selectedProject>/realRevenue'
+									}, {
+										path: 'selectedProject>/currency'
+									}],
+									formatter: '.formatter.toInvoicing'
+								}"
+							>
+								<layoutData>
+									<layout:GridData span="L4 M4"/>
+								</layoutData>
+							</ObjectStatus>
+						</form:SimpleForm>
+						<form:SimpleForm
+							layout="ResponsiveGridLayout"
+							class="sapUiForceWidthAuto sapUiResponsiveMargin"
+						>
+							<form:title>
+								<core:Title text="4"/>
+							</form:title>
+							<Label
+								design="Bold"
+								text="Další OP"
+							>
+								<layoutData>
+									<layout:GridData span="L8 M8"/>
+								</layoutData>
+							</Label>
+							<Text text="{
+								parts: [{
+									path: 'crmCases>/price'
+								}, {
+									path: 'selectedProject>/currency'
+								}],
+								type: 'sap.ui.model.type.Currency',
+								formatOptions: {
+									showMeasure: true
+								}
+							}">
+								<layoutData>
+									<layout:GridData span="L4 M4"/>
+								</layoutData>
+							</Text>
+						</form:SimpleForm>
+					</content>
+				</Page>
+			</f:midColumnPages>
+		</f:FlexibleColumnLayout>
+	</App>
+</mvc:View>

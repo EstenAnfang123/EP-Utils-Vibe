@@ -1,0 +1,126 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<Table
+		id="tablePlanOpportunities"
+		items="{detail>/planOpportunities}"
+		delete=".onDeleteRowPress"
+		growing="true"
+		alternateRowColors="true"
+	>
+		<headerToolbar>
+			<Toolbar>
+				<content>
+					<Title
+						level="H2"
+						text="{i18n>opportunitiesTableTitle}"
+					/>
+					<ToolbarSpacer/>
+					<Button
+						icon="sap-icon://add"
+						type="Transparent"
+						visible="{= !!${detail>/user}}"
+						press=".onAddNewOpportunityPress"
+					/>
+					<ToggleButton
+						text="{i18n>delete}"
+						icon="sap-icon://delete"
+						type="Transparent"
+						visible="{= !!${detail>/user}}"
+						press=".onToggleRemovePress"
+					/>
+					<Button
+						icon="sap-icon://save"
+						text="{i18n>save}"
+						type="Transparent"
+						visible="{= !!${detail>/planOpportunities}.length}"
+						press=".onSaveOpportunities"
+					/>
+				</content>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column width="14em"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+			<Column hAlign="Center"/>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Input value="{detail>name}"/>
+					<Input
+						value="{detail>january}"
+						textAlign="Center"
+						submit=".onPlanValueSubmit"
+					/>
+					<Input
+						value="{detail>february}"
+						textAlign="Center"
+						submit=".onPlanValueSubmit"
+					/>
+					<Input
+						value="{detail>march}"
+						textAlign="Center"
+						submit=".onPlanValueSubmit"
+					/>
+					<Input
+						value="{detail>april}"
+						textAlign="Center"
+						submit=".onPlanValueSubmit"
+					/>
+					<Input
+						value="{detail>may}"
+						textAlign="Center"
+						submit=".onPlanValueSubmit"
+					/>
+					<Input
+						value="{detail>june}"
+						textAlign="Center"
+						submit=".onPlanValueSubmit"
+					/>
+					<Input
+						value="{detail>july}"
+						textAlign="Center"
+						submit=".onPlanValueSubmit"
+					/>
+					<Input
+						value="{detail>august}"
+						textAlign="Center"
+						submit=".onPlanValueSubmit"
+					/>
+					<Input
+						value="{detail>september}"
+						textAlign="Center"
+						submit=".onPlanValueSubmit"
+					/>
+					<Input
+						value="{detail>october}"
+						textAlign="Center"
+						submit=".onPlanValueSubmit"
+					/>
+					<Input
+						value="{detail>november}"
+						textAlign="Center"
+						submit=".onPlanValueSubmit"
+					/>
+					<Input
+						value="{detail>december}"
+						textAlign="Center"
+						submit=".onPlanValueSubmit"
+					/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

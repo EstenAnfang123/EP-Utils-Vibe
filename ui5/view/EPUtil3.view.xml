@@ -1,0 +1,29 @@
+<mvc:View
+	controllerName="sap.ui.demo.basicTemplate.controller.EPUtil3"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:code="sap.ui.codeeditor"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page id="pageEPUtil3" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<l:VerticalLayout width="100%">
+				<l:HorizontalLayout class="sapUiResponsiveMargin">
+					<Input id="issueIdInput" placeholder="Issue" width="200px" class="sapUiSmallMarginEnd"/>
+					<Button text="Vyhledat" press="onSearch"/>
+				</l:HorizontalLayout>
+				<TextArea width="200px" editable="false" value="Převzetí: {issue>/prevzeti}{i18n>newLine}Vyřešení: {issue>/vyreseni}" class="sapUiResponsiveMargin"/>
+				<Panel expandable="true" headerText="Další data" width="auto" class="sapUiResponsiveMargin">
+					<content>
+						<code:CodeEditor
+							id="displayJSON"
+							type="json"
+							editable="false"
+							value="{util>/}"
+							height="600px"/>
+					</content>
+				</Panel>
+			</l:VerticalLayout>
+		</content>
+	</Page>
+</mvc:View>
