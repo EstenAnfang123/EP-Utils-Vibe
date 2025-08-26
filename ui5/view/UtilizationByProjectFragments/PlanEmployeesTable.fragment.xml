@@ -112,72 +112,85 @@
 			</Column>
 		</columns>
 		<items>
-			<ColumnListItem class = "red">
+			<ColumnListItem class="{= ${detail>sortWeight} === 999 ? 'sapMListTblFooter' : ''}">
 				<cells>
 					<Text text="{detail>name}"/>
 					<Input
 						value="{detail>totalPlanned}"
 						textAlign="Center"
+						editable="{= ${detail>sortWeight} !== 999}"
 						submit=".onProjectUsersSubmit"
 					/>
 					<Input
 						value="{detail>january}"
 						textAlign="Center"
+						editable="{= ${detail>sortWeight} !== 999}"
 						submit=".onProjectUsersSubmit"
 					/>
 					<Input
 						value="{detail>february}"
 						textAlign="Center"
+						editable="{= ${detail>sortWeight} !== 999}"
 						submit=".onProjectUsersSubmit"
 					/>
 					<Input
 						value="{detail>march}"
 						textAlign="Center"
+						editable="{= ${detail>sortWeight} !== 999}"
 						submit=".onProjectUsersSubmit"
 					/>
 					<Input
 						value="{detail>april}"
 						textAlign="Center"
+						editable="{= ${detail>sortWeight} !== 999}"
 						submit=".onProjectUsersSubmit"
 					/>
 					<Input
 						value="{detail>may}"
 						textAlign="Center"
+						editable="{= ${detail>sortWeight} !== 999}"
 						submit=".onProjectUsersSubmit"
 					/>
 					<Input
 						value="{detail>june}"
 						textAlign="Center"
+						editable="{= ${detail>sortWeight} !== 999}"
 						submit=".onProjectUsersSubmit"
 					/>
 					<Input
 						value="{detail>july}"
 						textAlign="Center"
+						editable="{= ${detail>sortWeight} !== 999}"
 						submit=".onProjectUsersSubmit"
 					/>
 					<Input
 						value="{detail>august}"
 						textAlign="Center"
+						editable="{= ${detail>sortWeight} !== 999}"
 						submit=".onProjectUsersSubmit"
 					/>
 					<Input
 						value="{detail>september}"
 						textAlign="Center"
+						editable="{= ${detail>sortWeight} !== 999}"
 						submit=".onProjectUsersSubmit"
 					/>
 					<Input
 						value="{detail>october}"
 						textAlign="Center"
+						editable="{= ${detail>sortWeight} !== 999}"
 						submit=".onProjectUsersSubmit"
 					/>
 					<Input
 						value="{detail>november}"
 						textAlign="Center"
+						editable="{= ${detail>sortWeight} !== 999}"
 						submit=".onProjectUsersSubmit"
 					/>
 					<Input
 						value="{detail>december}"
 						textAlign="Center"
+						editable="{= ${detail>sortWeight} !== 999}"
 						submit=".onProjectUsersSubmit"
 					/>
 				</cells>

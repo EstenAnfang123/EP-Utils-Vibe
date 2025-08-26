@@ -265,70 +265,10 @@ sap.ui.define(
 					projectTimeEntries
 				);
 
-
-				// 1. Add sum of months per user
-workersPlan.forEach((worker) => {
-	worker.sortWeight = 1;
-	let userTotal = 0;
-	this._months.forEach((month) => {
-		userTotal += Number(worker[month] || 0);
-	});
-	worker.totalPlanned = formatter.roundTo3Decimals(userTotal); // optional: format to 3 decimals
-});
-
-
-workersPlanNextYear.forEach((worker) => {
-	let userTotal = 0;
-	this._months.forEach((month) => {
-		userTotal += Number(worker[month] || 0);
-	});
-	worker.totalPlanned = formatter.roundTo3Decimals(userTotal);
-});
-
-workersReality.forEach((worker) => {
-	worker.sortWeight = 1;
-	let userTotal = 0;
-	this._months.forEach((month) => {
-		userTotal += Number(worker[month] || 0);
-	});
-	worker.totalPlanned = formatter.roundTo3Decimals(userTotal); // optional: format to 3 decimals
-});
-
-var totalRow = { name: "Celkem", sortWeight: 999 }; //shown as last row
-// 2. Calculate monthly totals across all users
-var monthlySums = {};
-var grandTotal = {};
-this._months.forEach((month) => {
-
-	monthlySums[month] = formatter.roundTo3Decimals(
-		workersPlan.reduce((sum, worker) => sum + Number(worker[month] || 0), 0)
-	);
-	totalRow[month] = monthlySums[month];
-    grandTotal = this._months.reduce((sum, month) => sum + (monthlySums[month] || 0), 0);
-	totalRow.totalPlanned = formatter.roundTo3Decimals(grandTotal);
-	workersPlan.push(totalRow); // Add to end of list
-});
-
-this._months.forEach((month) => {
-	monthlySums[month] = formatter.roundTo3Decimals(
-		workersPlanNextYear.reduce((sum, worker) => sum + Number(worker[month] || 0), 0)
-	);
-	totalRow[month] = monthlySums[month];
-    grandTotal = this._months.reduce((sum, month) => sum + (monthlySums[month] || 0), 0);
-	totalRow.totalPlanned = formatter.roundTo3Decimals(grandTotal);
-	workersPlanNextYear.push(totalRow);
-});
-
-this._months.forEach((month) => {
-	monthlySums[month] = formatter.roundTo3Decimals(
-		workersReality.reduce((sum, worker) => sum + Number(worker[month] || 0), 0)
-	);
-	totalRow[month] = monthlySums[month];
-    grandTotal = this._months.reduce((sum, month) => sum + (monthlySums[month] || 0), 0);
-	totalRow.totalPlanned = formatter.roundTo3Decimals(grandTotal);
-	workersReality.push(totalRow);
-});
-
+				// Add totals for each table
+				this._addTableTotals(workersPlan);
+				this._addTableTotals(workersPlanNextYear);
+				this._addTableTotals(workersReality);
 
 
 //tady suma z array workersPlan, suma z workersPlanNextYear, suma z workersReality ? 
@@ -345,6 +285,45 @@ oView.getModel("detail").setProperty("/monthlySums", monthlySums);
 				oView.setBusy(false);
 			},
 
+			_addTableTotals: function(workers) {
+				// Add individual user totals (row totals)
+				workers.forEach((worker) => {
+					worker.sortWeight = 1;
+					let userTotal = 0;
+					this._months.forEach((month) => {
+						// Handle reality format "actual/planned"
+						let value = worker[month];
+						if (typeof value === 'string' && value.includes('/')) {
+							value = parseFloat(value.split('/')[0]) || 0;
+						}
+						userTotal += Number(value || 0);
+					});
+					worker.totalPlanned = formatter.roundTo3Decimals(userTotal);
+				});
+
+				// Create total row (column totals)
+				const totalRow = { 
+					name: "Celkem", 
+					sortWeight: 999 
+				};
+
+				let grandTotal = 0;
+				this._months.forEach((month) => {
+					const monthlySum = workers.reduce((sum, worker) => {
+						let value = worker[month];
+						if (typeof value === 'string' && value.includes('/')) {
+							value = parseFloat(value.split('/')[0]) || 0;
+						}
+						return sum + Number(value || 0);
+					}, 0);
+					
+					totalRow[month] = formatter.roundTo3Decimals(monthlySum);
+					grandTotal += monthlySum;
+				});
+
+				totalRow.totalPlanned = formatter.roundTo3Decimals(grandTotal);
+				workers.push(totalRow);
+			},
 			_loadProjectIssues: async function (projectId) {
 				try {
 					const projectIssues = await (
